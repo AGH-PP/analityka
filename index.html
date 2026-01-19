@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PSFRH58G');</script>
-<!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSFRH58G');</script>
   <meta charset="UTF-8" />
   <title>Super Produkt – oferta specjalna</title>
   <meta name="description" content="Poznaj super produkt, który rozwiąże Twój problem. Sprawdź szczegóły i zamów teraz." />
@@ -16,65 +14,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <style>
     body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; }
     section { padding: 60px 20px; border-bottom: 1px solid #ddd; }
-    .btn { display: inline-block; padding: 12px 20px; background: #007bff; color: #fff; text-decoration: none; margin-top: 10px; }
+    .btn { display: inline-block; padding: 12px 20px; background: #007bff; color: #fff; text-decoration: none; margin-top: 10px; cursor: pointer; border: none; }
     .products { display: flex; gap: 20px; }
     .product { border: 1px solid #ccc; padding: 20px; width: 50%; }
     iframe { max-width: 100%; }
-    form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; }
+    form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+    
+    /* Prosty Banner Zgód (Modal) */
+    #consent-banner { position: fixed; bottom: 0; width: 100%; background: #333; color: #fff; padding: 20px; text-align: center; z-index: 1000; }
+    .hidden { display: none; }
   </style>
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PSFRH58G"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!-- HERO -->
+
+<div id="consent-banner">
+  <p>Używamy plików cookie do analizy ruchu.</p>
+  <button onclick="acceptConsent()" class="btn" style="background: green;">Zgoda</button>
+  <button onclick="rejectConsent()" class="btn" style="background: red;">Odrzuć</button>
+</div>
+
 <section id="hero">
   <h1>Super Produkt</h1>
   <p>Rozwiązanie Twojego problemu w 7 dni</p>
-  <img src="https://via.placeholder.com/800x300" alt="Hero image">
+  <div class="carousel-placeholder">
+    <img src="https://via.placeholder.com/800x300?text=Karuzela+Slajd+1" alt="Hero image">
+  </div>
   <br>
-  <a href="#formularz" class="btn cta-btn" data-cta="hero">Zobacz więcej</a>
+  <a href="#formularz" class="btn cta-btn" id="ab-main-cta" data-cta="hero">Zobacz więcej</a>
 </section>
 
-<!-- PRODUKTY -->
 <section id="produkty">
   <h2>Nasze produkty</h2>
   <div class="products">
-
     <div class="product">
       <h3>Produkt A</h3>
       <p>Krótki opis produktu A</p>
-      <a href="#szczegoly-a" class="btn details-btn" data-product="A">Szczegóły</a>
+      <a href="https://google.com?product=A" target="_blank" class="btn details-btn" data-product="A">Szczegóły</a>
       <br>
-      <a href="#formularz" class="btn cta-btn" data-cta="product_a">Kup teraz</a>
+      <a href="#formularz" class="btn cta-btn" data-cta="product_a_buy">Kup teraz</a>
     </div>
 
     <div class="product">
       <h3>Produkt B</h3>
       <p>Krótki opis produktu B</p>
-      <a href="#szczegoly-b" class="btn details-btn" data-product="B">Szczegóły</a>
+      <a href="https://google.com?product=B" target="_blank" class="btn details-btn" data-product="B">Szczegóły</a>
       <br>
-      <a href="#formularz" class="btn cta-btn" data-cta="product_b">Kup teraz</a>
+      <a href="#formularz" class="btn cta-btn" data-cta="product_b_buy">Kup teraz</a>
     </div>
-
   </div>
 </section>
 
-<!-- VIDEO -->
 <section id="video">
   <h2>Zobacz jak działa</h2>
-  <iframe width="560" height="315"
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  <iframe id="ytplayer" width="560" height="315"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" 
     frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
   <br>
-  <a href="#formularz" class="btn cta-btn" data-cta="video">Kup teraz</a>
+  <a href="#formularz" class="btn cta-btn" data-cta="video_section">Kup teraz</a>
 </section>
 
-<!-- CECHY -->
 <section id="cechy">
   <h2>Dlaczego warto?</h2>
   <ul>
@@ -82,34 +84,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li>Łatwa obsługa</li>
     <li>Wsparcie 24/7</li>
   </ul>
-  <a href="#formularz" class="btn cta-btn" data-cta="features">Zamów</a>
+  <a href="#formularz" class="btn cta-btn" data-cta="features_section">Zamów</a>
 </section>
 
-<!-- OPINIE -->
 <section id="opinie">
   <h2>Opinie klientów</h2>
   <blockquote>„Najlepszy zakup w tym roku!” – Anna</blockquote>
   <blockquote>„Polecam każdemu” – Marek</blockquote>
-  <a href="#formularz" class="btn cta-btn" data-cta="reviews">Kup teraz</a>
+  <a href="#formularz" class="btn cta-btn" data-cta="reviews_section">Kup teraz</a>
 </section>
 
-<!-- FORMULARZ -->
 <section id="formularz">
   <h2>Zamów teraz</h2>
-
   <form id="lead-form">
-    <input type="text" name="name" placeholder="Imię i nazwisko">
-    <input type="tel" name="phone" placeholder="Telefon">
-    <textarea name="message" placeholder="Treść wiadomości"></textarea>
-    <button type="submit" class="btn">Wyślij</button>
+    <input type="text" id="form_name" name="name" placeholder="Imię i nazwisko" required>
+    <input type="tel" id="form_phone" name="phone" placeholder="Telefon" required>
+    <textarea id="form_msg" name="message" placeholder="Treść wiadomości"></textarea>
+    <button type="submit" class="btn" id="form_submit_btn">Wyślij</button>
   </form>
-
-  <p>
-    Administratorem danych jest Firma XYZ. Dane przetwarzane są w celu
-    kontaktu handlowego zgodnie z RODO.
+  <p style="font-size: 12px;">
+    Administratorem danych jest Firma XYZ. Dane przetwarzane są w celu kontaktu handlowego zgodnie z RODO.
   </p>
 </section>
 
+<script>
+  // Obsługa zgód (Consent Mode v2)
+  function acceptConsent() {
+    document.getElementById('consent-banner').classList.add('hidden');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'consent_update',
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted'
+    });
+  }
+
+  function rejectConsent() {
+    document.getElementById('consent-banner').classList.add('hidden');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'consent_update',
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied'
+    });
+  }
+
+  // Symulacja wysyłki formularza dla GTM
+  document.getElementById('lead-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({
+      'event': 'form_submission_success',
+      'form_id': 'lead-form'
+    });
+    alert('Dziękujemy za wiadomość!');
+  });
+</script>
+
 </body>
 </html>
-
